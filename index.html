@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>Mairie de Nonards — Maintenance</title>
+
+  <style>
+    :root{
+      --bg1:#06121f;
+      --bg2:#0b1f33;
+      --card: rgba(255,255,255,.08);
+      --stroke: rgba(255,255,255,.14);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.70);
+      --accent:#2dd4bf;
+      --accent2:#60a5fa;
+      --radius: 22px;
+      --shadow: 0 24px 80px rgba(0,0,0,.55);
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      color: var(--text);
+      background:
+        radial-gradient(1100px 620px at 15% 18%, rgba(45,212,191,.22), transparent 60%),
+        radial-gradient(980px 560px at 88% 74%, rgba(96,165,250,.18), transparent 58%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+      overflow:hidden;
+    }
+
+    .grain{
+      position:fixed; inset:0;
+      pointer-events:none;
+      opacity:.08;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+      mix-blend-mode: overlay;
+      animation: grainMove 9s linear infinite;
+    }
+
+    @keyframes grainMove{
+      from{ transform:translate3d(0,0,0); }
+      to{ transform:translate3d(-50px,35px,0); }
+    }
+
+    .wrap{
+      min-height:100%;
+      display:grid;
+      place-items:center;
+      padding: 32px 18px;
+      position:relative;
+    }
+
+    .blob{
+      position:absolute;
+      border-radius:999px;
+      filter: blur(40px);
+      opacity:.35;
+      pointer-events:none;
+      mix-blend-mode: screen;
+      animation: float 10s ease-in-out infinite;
+    }
+
+    .blob.a{
+      width:320px; height:320px;
+      left:-120px; top:80px;
+      background: var(--accent);
+    }
+
+    .blob.b{
+      width:420px; height:420px;
+      right:-160px; bottom:-140px;
+      background: var(--accent2);
+      animation-delay:-3s;
+    }
+
+    @keyframes float{
+      0%,100%{ transform: translate3d(0,0,0) scale(1); }
+      50%{ transform: translate3d(22px,-18px,0) scale(1.06); }
+    }
+
+    .card{
+      width:min(820px, 100%);
+      background: var(--card);
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+      padding: 40px 28px;
+      text-align:center;
+      transform: translateY(10px);
+      opacity:0;
+      animation: enter .7s ease-out forwards;
+    }
+
+    @keyframes enter{
+      to{ transform: translateY(0); opacity:1; }
+    }
+
+    .logo{
+      width:60px; height:60px;
+      margin: 0 auto 18px;
+      border-radius:18px;
+      display:grid;
+      place-items:center;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 16px 40px rgba(0,0,0,.25);
+    }
+
+    .logo svg{
+      width:30px; height:30px;
+    }
+
+    h1{
+      margin:0 0 14px;
+      font-size: clamp(32px, 4.5vw, 48px);
+      letter-spacing:-0.02em;
+    }
+
+    p{
+      margin:0;
+      font-size: 18px;
+      color: var(--muted);
+      line-height:1.7;
+    }
+
+    .footer{
+      margin-top: 32px;
+      font-size: 14px;
+      color: rgba(255,255,255,.55);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="grain"></div>
+
+  <div class="wrap">
+    <div class="blob a"></div>
+    <div class="blob b"></div>
+
+    <main class="card">
+      <div class="logo">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M6 20V10.5L12 7l6 3.5V20" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M9.5 20v-5h5v5" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M12 4v3" stroke="black" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+
+      <h1>Mairie de Nonards</h1>
+
+      <p>
+        Le site officiel est actuellement en maintenance.<br>
+        Nous vous remercions de votre compréhension.
+      </p>
+
+      <div class="footer">
+        © <span id="year"></span> Mairie de Nonards
+      </div>
+    </main>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
